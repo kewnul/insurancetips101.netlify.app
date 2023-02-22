@@ -1,0 +1,32 @@
+{{ if .IsHome -}}
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "WebSite",
+    "name": "{{ .Site.Title }}",
+    "url": "{{ .Site.BaseURL }}",
+    "description": "{{ .Site.Params.description }}",
+    "thumbnailUrl": "{{ .Site.Params.Logo | absURL }}",
+    "license": "{{ .Site.Params.Copyright }}"
+}
+</script>
+{{ else if .IsPage }}
+{{ $author :=  or (.Params.author) (.Site.Author.name) }}
+{{ $org_name :=  .Site.Title }}
+<script type='application/ld+json'>
+ {
+   "@context": "https://schema.org/",
+   "@type": "Book",
+   "name": "{{ .Params.title }}",
+   "aggregateRating": {
+  "@type": "AggregateRating",
+  "ratingValue": "{{ .Params.ratingvalue }}",
+  "ratingCount": "{{ .Params.ratingcount }}",
+  "bestRating": "5",
+  "worstRating": "1"
+   }
+ }
+</script>
+{{ end }}
+
+

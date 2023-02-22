@@ -1,0 +1,21 @@
+<div class="text-center bg-success">
+	<h5 class="card-header mb-1 text-light">Popular Articles</h5>
+</div>
+
+{{ range first 6 (shuffle (where (where site.RegularPages "Type" "in" site.Params.mainSections) "Title" "!=" .Title )) }}
+
+                  <div class="card border mb-3">
+                      <a href="{{ .Permalink }}">
+                      <img class='card-img-top img-samping mt-0 mb-0' 
+                          src='{{ if eq .Params.Image "" }}https://placeholder.pics/svg/320x160{{else}}{{ .Params.Image}}{{end}}'
+                          alt='{{ .Title | markdownify }}'>
+                      </a>
+                      <div class="card-body">
+                          <h6 class="card-title mt-0 mb-0">
+                              <a class="text-dark" href="{{ .Permalink }}">{{ .Title | markdownify }}</a>
+                          </h6>
+                      </div>
+                  </div>
+
+
+{{- end -}}
